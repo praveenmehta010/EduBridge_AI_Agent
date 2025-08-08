@@ -1,19 +1,14 @@
 import os
-import streamlit as st
 from serpapi import GoogleSearch
 from dotenv import load_dotenv
 
 load_dotenv()
 
-def get_env(key: str):
-    """Try to get from Streamlit secrets, then from environment."""
-    return st.secrets.get(key) or os.getenv(key)
-
 def get_courses(topic):
     params = {
         "engine": "google",
         "q": f"{topic} free online course site:coursera.org OR site:edx.org OR site:udemy.com",
-        "api_key": get_env("SERPAPI_API_KEY")
+        "api_key": os.getenv("SERPAPI_API_KEY")
     }
 
     search = GoogleSearch(params)

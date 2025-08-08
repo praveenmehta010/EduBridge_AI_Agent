@@ -1,3 +1,4 @@
+
 # 🎓 AI-Powered Learning Assistant for Personalized Course Recommendations (EduBridge)
 
 - This project is an interactive AI-Agent used to find free course sources, It is designed to support **Sustainable Development Goals: Quality Education**. Built with **Streamlit**, it utilizes IBM's **WatsonX Granite LLM** and **SERPAPI** for intelligent, contextual responses based on user text input.
