@@ -1,0 +1,7 @@
+# Dir
+test
+__pycache__/
+venv
+
+# Env File
+.env
