@@ -18,14 +18,6 @@ if st.button("🚀 Find Courses") and user_input:
     with st.spinner("Thinking..."):
         agent = build_agent()
         result = agent.invoke({"user_input": user_input})
-        
-        # if st.secrets.get("DEBUG") == "true":
-        #     st.subheader("🧪 Raw JSON Result (for debugging)")
-        #     st.json(result)
-        #     st.write("Printing secrets for debugging:")
-        # for key, value in st.secrets.items():
-        #     st.write(f"{key}: {value}")
-
         courses = result.get("courses", [])
 
         if courses:
