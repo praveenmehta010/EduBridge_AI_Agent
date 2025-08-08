@@ -5,3 +5,5 @@ venv
 
 # Env File
 .env
+
+.streamlit/secrets.toml

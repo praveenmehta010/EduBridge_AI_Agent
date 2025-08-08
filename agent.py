@@ -22,19 +22,27 @@ Respond in JSON like:
 {{
     "topic": "topic_name",
     "level": "beginner/intermediate/advanced"
-}}
-"""
+}}"""
+
     response = llm.invoke(prompt)
 
-    if isinstance(response, str):
-        json_start = response.find("{")
-        json_end = response.rfind("}") + 1
-        try:
-            parsed = json.loads(response[json_start:json_end])
-        except Exception:
-            parsed = {"topic": "general", "level": "beginner"}
-    else:
-        parsed = response
+    # Ensure response is a string
+    response_text = response if isinstance(response, str) else str(response)
+
+    # Try to extract the first valid JSON object
+    try:
+        json_start = response_text.find("{")
+        json_end = response_text.rfind("}") + 1
+        json_str = response_text[json_start:json_end]
+
+        parsed = json.loads(json_str)
+    except json.JSONDecodeError as e:
+        # Optional: log the raw response and error
+        print("JSON decode failed:", e)
+        print("LLM response:", response_text)
+
+        # Fallback
+        parsed = {"topic": "general", "level": "beginner"}
 
     return {
         "topic": parsed.get("topic", "general"),
